@@ -1,0 +1,55 @@
+echo "Menú Varios Usuarios"
+echo 
+echo "1. MOSTRAR NOMBRE DE USUARIOS CONECTADOS" 
+echo "2. MOSTRAR NÚMERO DE USUARIOS CONECTADOS" 
+echo "3. AVERIGUAR SI UN USUARIO ESTÁ CONECTADO" 
+echo "4. ENVIAR MENSAJE A UN USUARIO" 
+echo "9. REGRESAR" 
+echo 
+echo "Seleccione la opción deseada __"
+
+read opcion
+
+case $opcion in
+	1)
+		who	
+		echo
+		sh usuarios
+		;;
+	2)
+		con=`who | wc -l | sed 's/^ *//g'`
+		echo "los ususarios conectados son:"		
+		echo $con
+		echo
+		sh usuarios
+		;;
+	3)
+		echo "Ingrese el usuario a consultar:"
+		read usu
+		buscar=who | grep $usu
+		echo $buscar
+		echo 
+		sh usuarios
+		;;
+	4)
+		echo "Ingrese el usuario a comunicarse:"
+		read usua
+		echo "Ingrese el mensaje para el usuario:"
+		read mensaje
+		write $usua
+		$mensaje
+		echo $opcion
+		echo
+		sh usuarios
+		;;
+	9)
+		clear
+		sh practica
+		;;
+	*)
+		echo "Ingrese una opción valida..."
+		sleep 3
+		clear
+		sh comandos
+		;;
+esac

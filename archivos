@@ -1,0 +1,329 @@
+echo "Menú Sistema de Archivos"
+echo 
+echo "1. CREAR DIRECTORIO"
+echo "2. COPIAR ARHIVOS"
+echo "3. MODIFICAR PERMISOS A UN ARCHIVO"
+echo "4. VISUALIZAR EL CONTENIDO DE UN ARHIVO"
+echo "5. BORRAR UN ARCHIVO"
+echo "6. CAMBIAR EL NOMBRE DE UN ARCHIVO"
+echo "7. BORRAR UN DIRECTORIO"
+echo "9. REGRESAR"
+echo
+echo "Seleccione la opción deseada __"
+
+read opcion
+
+case $opcion in
+	1)
+		echo "Ingrese el nombre del directorio a crear"
+		read dir
+		mkdir $dir
+		echo "El directorio se ha creado exitosamente"
+		sleep 2
+		clear
+		sh archivos
+		;;
+	2)
+		echo "Ingrese el nombre del primer archivo"
+		read arch1
+		echo "Ingrese el nombre del segundo archivo"
+		read arch2
+
+		if [ -f /home/santiago/$arch1 ];
+		then
+			if [ -f /home/santiago/$arch2 ];
+			then
+				echo "El segundo archivo existe, desea sobreescribirlo? (Y/N)"
+				read decision
+				case $decision in
+					y)
+						cp $arch1 $arch2
+						echo "Copiado Exitosamente! Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					Y)
+						cp $arch1 $arch2
+						echo "Copiado Exitosamente! Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					n)
+						echo "Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					N)
+						echo "Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					*)	
+						echo "No se ingresó una respuesta correcta. Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+				esac
+			else
+				cp $arch1 $arch2
+				echo "Copiado Exitosamente! Regresando al menú de archivos..."
+				sleep 2
+				clear
+				sh archivos
+			fi
+		else
+			echo "El primer archivo no existe... Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	3)
+		echo "Ingrese el nombre del archivo: "
+		read permisos
+		if [ -f /home/santiago/$permisos ];
+		then
+			echo "Escriba los permisos que le quiere dar al usuario: 0, r, w, x, rw, wx , rx, rwx. (r=leer, w=escribir, x=ejecutar)"
+			read usuario
+			case $usuario in
+				0)
+					chmod u-rwx $permisos
+					;;
+				r)
+					chmod u=r $permisos
+					;;
+				w)
+					chmod u=w $permisos
+					;;
+				x)
+					chmod u=x $permisos
+					;;
+				rw)
+					chmod u=rw $permisos
+					;;
+				wx)
+					chmod u=wx $permisos
+					;;
+				rx)
+					chmod u=rx $permisos
+					;;
+				rwx)
+					chmod u=rwx $permisos
+					;;
+				*)
+					echo "Ingrese datos validos... Regresando al menú de archivos..."
+					sleep 2
+					clear
+					sh archivos
+					;;
+			esac
+			echo "Escriba los permisos que le quiere dar al grupo: 0, r, w, x, rw, wx , rx, rwx. (r=leer, w=escribir, x=ejecutar)"
+			read grupo
+			case $grupo in
+				0)
+					chmod g-rwx $permisos
+					;;
+				r)
+					chmod g=r $permisos
+					;;
+				w)
+					chmod g=w $permisos
+					;;
+				x)
+					chmod g=x $permisos
+					;;
+				rw)
+					chmod g=rw $permisos
+					;;
+				wx)
+					chmod g=wx $permisos
+					;;
+				rx)
+					chmod g=rx $permisos
+					;;
+				rwx)
+					chmod g=rwx $permisos
+					;;
+				*)
+					echo "Ingrese datos validos... Regresando al menú de archivos..."
+					sleep 2
+					clear
+					sh archivos
+					;;
+			esac
+			echo "Escriba los permisos que le quiere dar a otros: 0, r, w, x, rw, wx , rx, rwx. (r=leer, w=escribir, x=ejecutar)"
+			read otros
+			case $otros in
+				0)
+					chmod o-rwx $permisos
+					;;
+				r)
+					chmod o=r $permisos
+					;;
+				w)
+					chmod o=w $permisos
+					;;
+				x)
+					chmod o=x $permisos
+					;;
+				rw)
+					chmod o=rw $permisos
+					;;
+				wx)
+					chmod o=wx $permisos
+					;;
+				rx)
+					chmod o=rx $permisos
+					;;
+				rwx)
+					chmod o=rwx $permisos
+					;;
+				*)
+					echo "Ingrese datos validos... Regresando al menú de archivos..."
+					sleep 2
+					clear
+					sh archivos
+					;;
+			esac
+			echo "Se han cambiado los permisos exitosamente! Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		else
+			echo "El archivo ingresado no existe. Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	4)
+		echo "Ingresar el nombre del archivo: "
+		read contenido
+		if [ -f /home/santiago/$contenido ];
+		then
+			more $contenido
+			clear
+			sh archivos
+		else
+			echo "El archivo ingresado no existe. Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	5)
+		echo "Ingresar el nombre del archivo: "
+		read borrarA
+		if [ -f /home/santiago/$borrarA ];
+		then
+			rm -r $borrarA
+			echo "Se ha eliminado el archivo exitosamente! Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		else
+			echo "El archivo ingresado no existe. Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	6)
+		echo "ingrese el nombre del archivo: "
+		read nombre1
+		if [ -f /home/santiago/$nombre1 ];
+		then
+			echo "Ingrese el nuevo nombre del archivo:"
+			read nombre2
+			if [ -f /home/santiago/$nombre2 ];
+			then
+				echo "Este nombre ya existe. Regresando al menú de archivos."
+			else
+				mv /home/santiago/$nombre1 /home/santiago/$nombre2
+				echo "Se ha cambiado el nombre del archivo exitosamente! Regresando al menú de archivos"
+				sleep 2
+				clear
+				sh archivos
+			fi
+		else
+			echo "El archivo no existe. Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	7)
+		echo "ingrese el nombre del directorio: "
+		read dir1
+		if [ -f /home/santiago/$dir1 ];
+		then
+			if [ "$(ls -A /home/santiago/$dir1)" ];
+			then
+				echo "La carpeta contiene archivos, desea eliminarla de todas formas? (S/N):"
+				read decision2
+				case $decision2 in
+					s)
+						rm -dfr $dir
+						echo "El directorio se ha eliminado exitosamente! Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					S)
+						rm -dfr $dir
+						echo "El directorio se ha eliminado exitosamente! Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+						
+					n)
+						echo "Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					
+					N)
+						echo "Regresando al menú de archivos..."
+						sleep 2
+						clear
+						sh archivos
+						;;
+					*)
+						echo "Ingrese una opción valida. Regresando al menú de archivos"
+						sleep 2
+						clear
+						sh archivos
+						
+				esac
+			else
+				rmdir $dir1
+				echo "Se ha borrado el directorio exitosamente! Regresando al menú de archivos"
+				sleep 2
+				clear
+				sh archivos
+			fi
+		else
+			echo "El directorio no existe. Regresando al menú de archivos..."
+			sleep 2
+			clear
+			sh archivos
+		fi
+		;;
+	9)
+		clear
+		sh practica
+		;;
+	*)
+		echo "Ingrese una opción valida..."
+		sleep 3
+		clear
+		sh comandos
+		;;
+esac

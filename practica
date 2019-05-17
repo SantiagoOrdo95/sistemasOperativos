@@ -1,0 +1,35 @@
+echo "Menú Principal"
+echo 
+echo "1. COMANDOS GENERALES"
+echo "2. USUARIOS"
+echo "3. SISTEMA DE ARCHIVOS"
+echo "9. TERMINAR"
+echo 
+echo "Seleccione la opción deseada__"
+
+read opcion
+
+case $opcion in
+	1)
+		clear
+		sh comandos
+		;;
+	2)
+		clear
+		sh usuarios
+		;;
+	3)
+		clear
+		sh archivos
+		;;
+	9)
+		clear
+		;;
+	*)
+		echo "Ingrese un número válido..."
+		sleep 2
+		clear
+		sh practica
+		;;
+esac
+

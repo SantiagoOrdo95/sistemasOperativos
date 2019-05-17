@@ -1,0 +1,57 @@
+echo "Menú Comandos Generales"
+echo 
+echo "1. VISUALIZAR HORA DEL SISTEMA"
+echo "2. PATH O RUTA ACTUAL"
+echo "3. CAMBIO DE PASSWORD"
+echo "4. MOSTRAR DISCO LIBRE"
+echo "5. MOSTRAR DISCO UTILIZADO"
+echo "6. VISUALIZAR PROCESOS ACTIVOS"
+echo "9. REGRESAR"
+echo
+echo "Seleccione la opción deseada __"
+
+read opcion
+
+case $opcion in
+	1)
+		date
+		echo
+		sh comandos
+		;;
+	2)
+		pwd
+		echo
+		sh comandos
+		;;
+	3)
+		passwd $whoami
+		echo "Contraseña cambiada exitosamente. Regresando al menú de comandos..."
+		clear
+		sh comandos
+		;;
+	4)
+		df -h
+		echo
+		sh comandos
+		;;
+	5)
+		df -h
+		echo
+		sh comandos
+		;;
+	6)
+		ps -e
+		echo
+		sh comandos
+		;;
+	9)
+		clear
+		sh practica
+		;;
+	*)
+		echo "Ingrese una opción valida..."
+		sleep 3
+		clear
+		sh comandos
+		;;
+esac
